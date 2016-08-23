@@ -49,6 +49,23 @@
 		// updating user GCM registration ID
 		public function updateGcmId($user_id, $gcm_registration_id){
 			$response = array();
+			$stmt =$this->conn->prepare("UPDATE user SET gcm_registration_id=? WHERE user_id=? ");
+			$stmt->bind_param("si",$gcm_registration_id, $user_id);
+			
+			if($stmt->execute()){
+				 // User successfully updated
+				 $response['error'] = false;
+				 $response['message'] = 'GCM registration ID updated successfully';
+				
+			}else{
+				//Failed to update user
+				$response['error']=true;
+				$response['message']= "Failed to update GCM registration ID";
+				$stmt->error;
+			}
+			$stmt->close();
+			return $response;
+			
 			
 			
 			
