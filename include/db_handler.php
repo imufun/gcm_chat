@@ -88,6 +88,6 @@
 		 }//END->fetching single user by id
 		
 		
-	}sfsf
+	}
 
 ?>
