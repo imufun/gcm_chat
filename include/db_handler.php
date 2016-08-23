@@ -47,7 +47,7 @@
 		}//-- End - createUser
 		
 		// updating user GCM registration ID
-		public function updateGcmId($user_id, $gcm_registation_id){
+		public function updateGcmId($user_id, $gcm_registration_id){
 			$response = array();
 			
 			
