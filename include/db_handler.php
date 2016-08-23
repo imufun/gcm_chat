@@ -65,11 +65,27 @@
 			}
 			$stmt->close();
 			return $response;
-			
-			
-			
-			
 		}//END-GCM registration
+		
+		 //Start->fetching single user by id
+		 public function getUser($user_id){
+			 $stmt = $this->conn->prepare("SELECT user_id, name, email, gcm_registration_id, created_at FROM users user_id=?");
+			 $stmt = bind_param("s", $user_id);
+			  if($stmt->execute()){
+				  $stmt->bind_result($user_id, $name, $email, $gcm_registration_id, $created_at);
+				  $stmt->fetch();
+				  $user = array();
+				  $user["user_id"] =$user_id;
+				  $user["name"] = $name;
+				  $user["email"]=$email;
+				  $user["gcm_registration_id"]=$gcm_registration_id;
+				  $user["created_at"]=$created_at;
+				  $stmt->close();
+				  return $user; 
+				}else{
+					return null;
+				}
+		 }//END->fetching single user by id
 		
 		
 	}
