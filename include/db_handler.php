@@ -86,6 +86,35 @@
 					return null;
 				}
 		 }//END->fetching single user by id
+		 
+		//Start->fetching multiple users by ids
+		public function getusers(user_ids){
+			$users = array();
+			if(sizeof($user_ids)>0){
+				$query = "SELECT user_id, name, email, gcm_registration_id, created_at FROM user WHERE user_id IN(";
+				
+				foreach($user_ids as $user_id){
+					$query .=$user_id . ',';
+				}
+				
+				$query = substr($query, 0 , strlen($query) - 1);
+				$query .=')';
+				
+				$stmt =$this->conn->prepare($query);
+				$stmt->execute();
+				$result = $stmt->get_result();
+				
+				while($user = $result->fetch_assoc()){
+					$tmp = array();
+					$tmp["user_id"]=$user['user_id'];
+					$tmp["name"] = $user['name'];
+					
+				}
+				
+				
+			}
+			
+		}//END->fetching multiple users by ids
 		
 		
 	}
