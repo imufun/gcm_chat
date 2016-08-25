@@ -108,11 +108,14 @@
 					$tmp = array();
 					$tmp["user_id"]=$user['user_id'];
 					$tmp["name"] = $user['name'];
-					
+					$tmp["email"]=$user['email'];
+					$tmp["gcm_registration_id"]=$user['gcm_registration_id'];
+					$tmp["created_at"]=$user['created_at'];
+					$tmp->close();
+					 array_push($users, $tmp);				
 				}
-				
-				
 			}
+			return $users;
 			
 		}//END->fetching multiple users by ids
 		
